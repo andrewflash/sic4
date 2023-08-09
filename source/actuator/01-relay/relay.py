@@ -31,7 +31,7 @@ if __name__ == '__main__':
                 relay_off()
                 status = False
                 print("Relay off")
-            time.sleep(1)
+            time.sleep(0.5)
  
         # Reset by pressing CTRL + C
     except KeyboardInterrupt:
