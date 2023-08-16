@@ -1,0 +1,700 @@
+[
+    {
+        "id": "c521c5f6447e7157",
+        "type": "tab",
+        "label": "Deteksi Sampah - Servo",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "afa941d1d6aa651d",
+        "type": "mqtt in",
+        "z": "c521c5f6447e7157",
+        "name": "",
+        "topic": "sic4/sensor/distance_sampah_full",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "11ddcba0f77a3a71",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 120,
+        "wires": [
+            [
+                "1f94fe9cadd49e77"
+            ]
+        ]
+    },
+    {
+        "id": "9f79d6bd2c519a8d",
+        "type": "mqtt out",
+        "z": "c521c5f6447e7157",
+        "name": "",
+        "topic": "sic4/info/kondisi_bak_sampah",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "11ddcba0f77a3a71",
+        "x": 1070,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "8be365c87dbe4d45",
+        "type": "switch",
+        "z": "c521c5f6447e7157",
+        "name": "",
+        "property": "payload.distance",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lt",
+                "v": "5",
+                "vt": "str"
+            },
+            {
+                "t": "gt",
+                "v": "80",
+                "vt": "str"
+            },
+            {
+                "t": "btwn",
+                "v": "5",
+                "vt": "num",
+                "v2": "80",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "21d8b2f19d3420b6"
+            ],
+            [
+                "a65ddba2910d510e"
+            ],
+            [
+                "4e373153799b9647"
+            ]
+        ]
+    },
+    {
+        "id": "1f94fe9cadd49e77",
+        "type": "json",
+        "z": "c521c5f6447e7157",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 330,
+        "y": 120,
+        "wires": [
+            [
+                "8be365c87dbe4d45"
+            ]
+        ]
+    },
+    {
+        "id": "21d8b2f19d3420b6",
+        "type": "function",
+        "z": "c521c5f6447e7157",
+        "name": "function 1",
+        "func": "msg.payload = {\n    \"status\": \"full\"\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 60,
+        "wires": [
+            [
+                "aa019ea7dace63e5",
+                "676287c6ed0d1bfa"
+            ]
+        ]
+    },
+    {
+        "id": "a65ddba2910d510e",
+        "type": "function",
+        "z": "c521c5f6447e7157",
+        "name": "function 2",
+        "func": "msg.payload = {\n    \"status\": \"terlalu kosong\"\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 100,
+        "wires": [
+            [
+                "aa019ea7dace63e5",
+                "676287c6ed0d1bfa"
+            ]
+        ]
+    },
+    {
+        "id": "d6b830c3a1ef9b94",
+        "type": "mqtt out",
+        "z": "c521c5f6447e7157",
+        "name": "",
+        "topic": "sic4/sensor/distance_sampah_full",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "11ddcba0f77a3a71",
+        "x": 460,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "788a037d241fbeaf",
+        "type": "mqtt in",
+        "z": "c521c5f6447e7157",
+        "name": "",
+        "topic": "sic4/info/kondisi_bak_sampah",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "11ddcba0f77a3a71",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 480,
+        "y": 340,
+        "wires": [
+            [
+                "2486684167a6c2a7"
+            ]
+        ]
+    },
+    {
+        "id": "10c44c374427eec0",
+        "type": "inject",
+        "z": "c521c5f6447e7157",
+        "name": "Distance < 5",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"distance\":3}",
+        "payloadType": "json",
+        "x": 170,
+        "y": 220,
+        "wires": [
+            [
+                "d6b830c3a1ef9b94"
+            ]
+        ]
+    },
+    {
+        "id": "4739b26ac4937260",
+        "type": "inject",
+        "z": "c521c5f6447e7157",
+        "name": "Distance > 5 dan < 80",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"distance\":20}",
+        "payloadType": "json",
+        "x": 140,
+        "y": 260,
+        "wires": [
+            [
+                "d6b830c3a1ef9b94"
+            ]
+        ]
+    },
+    {
+        "id": "875d5b8599ae272c",
+        "type": "inject",
+        "z": "c521c5f6447e7157",
+        "name": "Distance > 80",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"distance\":90}",
+        "payloadType": "json",
+        "x": 170,
+        "y": 300,
+        "wires": [
+            [
+                "d6b830c3a1ef9b94"
+            ]
+        ]
+    },
+    {
+        "id": "2486684167a6c2a7",
+        "type": "debug",
+        "z": "c521c5f6447e7157",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "aa019ea7dace63e5",
+        "type": "ui_text",
+        "z": "c521c5f6447e7157",
+        "group": "6ccacd1f1644c23d",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Status Bak Sampah",
+        "format": "{{msg.payload.status}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 880,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "676287c6ed0d1bfa",
+        "type": "json",
+        "z": "c521c5f6447e7157",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 850,
+        "y": 40,
+        "wires": [
+            [
+                "9f79d6bd2c519a8d"
+            ]
+        ]
+    },
+    {
+        "id": "4e373153799b9647",
+        "type": "function",
+        "z": "c521c5f6447e7157",
+        "name": "function 3",
+        "func": "msg.payload = {\n    \"status\": \"aman\"\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 140,
+        "wires": [
+            [
+                "aa019ea7dace63e5",
+                "676287c6ed0d1bfa"
+            ]
+        ]
+    },
+    {
+        "id": "e6f9dbc975da0ed3",
+        "type": "mqtt in",
+        "z": "c521c5f6447e7157",
+        "name": "",
+        "topic": "sic4/sensor/deteksi_sampah",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "11ddcba0f77a3a71",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 440,
+        "wires": [
+            [
+                "db2cf53bc2d44a1e",
+                "4e53d35b1864e94b"
+            ]
+        ]
+    },
+    {
+        "id": "52f5f48c2d2d5b30",
+        "type": "function",
+        "z": "c521c5f6447e7157",
+        "name": "function 4",
+        "func": "var hasil = false;\n\nif(msg.payload.distance < 5) {\n    hasil = true;    \n}\n\nmsg.payload = {};\nmsg.payload.deteksi_sampah = hasil;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 440,
+        "wires": [
+            [
+                "230aa97f7c546a52"
+            ]
+        ]
+    },
+    {
+        "id": "db2cf53bc2d44a1e",
+        "type": "json",
+        "z": "c521c5f6447e7157",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 350,
+        "y": 440,
+        "wires": [
+            [
+                "52f5f48c2d2d5b30"
+            ]
+        ]
+    },
+    {
+        "id": "0aea3f27b5c89677",
+        "type": "mqtt out",
+        "z": "c521c5f6447e7157",
+        "name": "",
+        "topic": "sic4/aktuator/servo_pindahkan_sampah",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "11ddcba0f77a3a71",
+        "x": 920,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "230aa97f7c546a52",
+        "type": "json",
+        "z": "c521c5f6447e7157",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 650,
+        "y": 440,
+        "wires": [
+            [
+                "0aea3f27b5c89677"
+            ]
+        ]
+    },
+    {
+        "id": "660d0a7997c8fc42",
+        "type": "mqtt out",
+        "z": "c521c5f6447e7157",
+        "name": "",
+        "topic": "sic4/sensor/deteksi_sampah",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "11ddcba0f77a3a71",
+        "x": 420,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "39bea80f0dc8e81c",
+        "type": "inject",
+        "z": "c521c5f6447e7157",
+        "name": "Distance < 5",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"distance\":3}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 520,
+        "wires": [
+            [
+                "660d0a7997c8fc42"
+            ]
+        ]
+    },
+    {
+        "id": "8ffa3e1819c3ca0e",
+        "type": "inject",
+        "z": "c521c5f6447e7157",
+        "name": "Distance > 5 dan < 80",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"distance\":20}",
+        "payloadType": "json",
+        "x": 120,
+        "y": 560,
+        "wires": [
+            [
+                "660d0a7997c8fc42"
+            ]
+        ]
+    },
+    {
+        "id": "21303ed89f5c31fe",
+        "type": "inject",
+        "z": "c521c5f6447e7157",
+        "name": "Distance > 80",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"distance\":90}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 600,
+        "wires": [
+            [
+                "660d0a7997c8fc42"
+            ]
+        ]
+    },
+    {
+        "id": "e1b6590207e13138",
+        "type": "mqtt in",
+        "z": "c521c5f6447e7157",
+        "name": "",
+        "topic": "sic4/aktuator/servo_pindahkan_sampah",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "11ddcba0f77a3a71",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 450,
+        "y": 600,
+        "wires": [
+            [
+                "b71330a2ee659a3c"
+            ]
+        ]
+    },
+    {
+        "id": "b71330a2ee659a3c",
+        "type": "debug",
+        "z": "c521c5f6447e7157",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "bcfd67d416ca506c",
+        "type": "mqtt in",
+        "z": "c521c5f6447e7157",
+        "name": "",
+        "topic": "sic4/info/servo_hasil_perintah",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "11ddcba0f77a3a71",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 720,
+        "wires": [
+            [
+                "0acd3aed9c9b9cc9"
+            ]
+        ]
+    },
+    {
+        "id": "0acd3aed9c9b9cc9",
+        "type": "json",
+        "z": "c521c5f6447e7157",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 350,
+        "y": 720,
+        "wires": [
+            [
+                "f747081509a7b4ab"
+            ]
+        ]
+    },
+    {
+        "id": "f747081509a7b4ab",
+        "type": "ui_text",
+        "z": "c521c5f6447e7157",
+        "group": "6ccacd1f1644c23d",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Info Hasil Perintah Servo",
+        "format": "{{msg.payload.status}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 550,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "4e53d35b1864e94b",
+        "type": "debug",
+        "z": "c521c5f6447e7157",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 240,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "11ddcba0f77a3a71",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "6ccacd1f1644c23d",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "7dd11d773d2a25ff",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7dd11d773d2a25ff",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
