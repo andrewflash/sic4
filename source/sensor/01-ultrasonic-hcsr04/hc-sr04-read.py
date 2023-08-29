@@ -11,7 +11,10 @@ GPIO_ECHO = 24
 #set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
 GPIO.setup(GPIO_ECHO, GPIO.IN)
- 
+
+# Set timeout in seconds
+TIMEOUT = 5
+
 def distance():
     # set Trigger to HIGH
     GPIO.output(GPIO_TRIGGER, True)
@@ -20,16 +23,21 @@ def distance():
     time.sleep(0.00001)
     GPIO.output(GPIO_TRIGGER, False)
  
+    RunTime = time.time()
     StartTime = time.time()
     StopTime = time.time()
  
     # save StartTime
     while GPIO.input(GPIO_ECHO) == 0:
         StartTime = time.time()
+        if StartTime - RunTime > TIMEOUT:
+            return -1
  
     # save time of arrival
     while GPIO.input(GPIO_ECHO) == 1:
         StopTime = time.time()
+        if StopTime - RunTime > TIMEOUT:
+            return -1
  
     # time difference between start and arrival
     TimeElapsed = StopTime - StartTime
@@ -43,8 +51,11 @@ if __name__ == '__main__':
     try:
         while True:
             dist = distance()
-            print ("Measured Distance = %.1f cm" % dist)
-            time.sleep(1)
+            if int(dist) == -1:
+                print("Gagal baca distance")
+            else:
+                print ("Measured Distance = %.1f cm" % dist)
+            time.sleep(0.5)
  
         # Reset by pressing CTRL + C
     except KeyboardInterrupt:

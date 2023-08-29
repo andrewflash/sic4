@@ -1,0 +1,504 @@
+[
+    {
+        "id": "55760e1d69cbbaaa",
+        "type": "tab",
+        "label": "K44 - Drainage Cleaner",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0eee846513f4c93a",
+        "type": "mqtt in",
+        "z": "55760e1d69cbbaaa",
+        "name": "",
+        "topic": "sic4/info/sampah_terdeteksi",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "11ddcba0f77a3a71",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 100,
+        "wires": [
+            [
+                "e86982f390658f41"
+            ]
+        ]
+    },
+    {
+        "id": "e86982f390658f41",
+        "type": "json",
+        "z": "55760e1d69cbbaaa",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 430,
+        "y": 100,
+        "wires": [
+            [
+                "4f257c3f553bc25f"
+            ]
+        ]
+    },
+    {
+        "id": "4f257c3f553bc25f",
+        "type": "ui_text",
+        "z": "55760e1d69cbbaaa",
+        "group": "d061965b9f0a2291",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Sampah Terdeteksi",
+        "format": "{{msg.payload.sampah_terdeteksi}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 610,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "eb73b18a321151c0",
+        "type": "mqtt in",
+        "z": "55760e1d69cbbaaa",
+        "name": "",
+        "topic": "sic4/info/sampah_penuh",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "11ddcba0f77a3a71",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 160,
+        "wires": [
+            [
+                "5632240453eab05b"
+            ]
+        ]
+    },
+    {
+        "id": "5632240453eab05b",
+        "type": "json",
+        "z": "55760e1d69cbbaaa",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 430,
+        "y": 160,
+        "wires": [
+            [
+                "0bb3b66f464c32bb",
+                "0b6d87bd3fd26540"
+            ]
+        ]
+    },
+    {
+        "id": "0bb3b66f464c32bb",
+        "type": "ui_text",
+        "z": "55760e1d69cbbaaa",
+        "group": "d061965b9f0a2291",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Sampah Penuh",
+        "format": "{{msg.payload.sampah_penuh}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 600,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "e8599293f070f3be",
+        "type": "mqtt in",
+        "z": "55760e1d69cbbaaa",
+        "name": "",
+        "topic": "sic4/info/air_tinggi",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "11ddcba0f77a3a71",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 340,
+        "wires": [
+            [
+                "c788c94ecd807420"
+            ]
+        ]
+    },
+    {
+        "id": "c788c94ecd807420",
+        "type": "json",
+        "z": "55760e1d69cbbaaa",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 370,
+        "y": 340,
+        "wires": [
+            [
+                "a302863b16da084e",
+                "19ade2f52ac4fd4e"
+            ]
+        ]
+    },
+    {
+        "id": "a302863b16da084e",
+        "type": "ui_text",
+        "z": "55760e1d69cbbaaa",
+        "group": "d061965b9f0a2291",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Air Tinggi",
+        "format": "{{msg.payload.air_tinggi}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 580,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "c7120bc9dbbd33d3",
+        "type": "ui_chart",
+        "z": "55760e1d69cbbaaa",
+        "name": "",
+        "group": "d061965b9f0a2291",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Ketinggian Air",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 860,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bdbb3dc7c6d12311",
+        "type": "ui_gauge",
+        "z": "55760e1d69cbbaaa",
+        "name": "",
+        "group": "d061965b9f0a2291",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Ketinggian Air",
+        "label": "cm",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 860,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "129a43de749fa782",
+        "type": "mqtt in",
+        "z": "55760e1d69cbbaaa",
+        "name": "Ketinggian Air",
+        "topic": "sic4/sensor/d3",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "11ddcba0f77a3a71",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 440,
+        "wires": [
+            [
+                "68465d1b45e227fe"
+            ]
+        ]
+    },
+    {
+        "id": "68465d1b45e227fe",
+        "type": "json",
+        "z": "55760e1d69cbbaaa",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 330,
+        "y": 440,
+        "wires": [
+            [
+                "b5772af001b3f6a4"
+            ]
+        ]
+    },
+    {
+        "id": "b5772af001b3f6a4",
+        "type": "change",
+        "z": "55760e1d69cbbaaa",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.distance_3",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 570,
+        "y": 440,
+        "wires": [
+            [
+                "c7120bc9dbbd33d3",
+                "bdbb3dc7c6d12311"
+            ]
+        ]
+    },
+    {
+        "id": "66abac5c687110d6",
+        "type": "telegram sender",
+        "z": "55760e1d69cbbaaa",
+        "name": "",
+        "bot": "984e53a95a312b53",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 990,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "65dd25751f8352bc",
+        "type": "trigger",
+        "z": "55760e1d69cbbaaa",
+        "name": "",
+        "op1": "{\"type\":\"message\",\"chatId\":\"170303845\",\"content\":\"Ketinggian air melebihi batas normal\"}",
+        "op2": "",
+        "op1type": "json",
+        "op2type": "nul",
+        "duration": "5",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 720,
+        "y": 280,
+        "wires": [
+            [
+                "66abac5c687110d6"
+            ]
+        ]
+    },
+    {
+        "id": "19ade2f52ac4fd4e",
+        "type": "switch",
+        "z": "55760e1d69cbbaaa",
+        "name": "",
+        "property": "payload.air_tinggi",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 570,
+        "y": 280,
+        "wires": [
+            [
+                "65dd25751f8352bc"
+            ]
+        ]
+    },
+    {
+        "id": "0b6d87bd3fd26540",
+        "type": "switch",
+        "z": "55760e1d69cbbaaa",
+        "name": "",
+        "property": "payload.sampah_penuh",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 570,
+        "y": 220,
+        "wires": [
+            [
+                "deeb75f81a322cbb"
+            ]
+        ]
+    },
+    {
+        "id": "deeb75f81a322cbb",
+        "type": "trigger",
+        "z": "55760e1d69cbbaaa",
+        "name": "",
+        "op1": "{\"type\":\"message\",\"chatId\":\"170303845\",\"content\":\"Sampah Penuh\"}",
+        "op2": "",
+        "op1type": "json",
+        "op2type": "nul",
+        "duration": "5",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 720,
+        "y": 220,
+        "wires": [
+            [
+                "66abac5c687110d6"
+            ]
+        ]
+    },
+    {
+        "id": "11ddcba0f77a3a71",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d061965b9f0a2291",
+        "type": "ui_group",
+        "name": "Drainage Celaner",
+        "tab": "b6a217dfa1b22ae1",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "984e53a95a312b53",
+        "type": "telegram bot",
+        "botname": "SIC4Demo1MentorAndri_bot",
+        "usernames": "K44",
+        "chatids": "170303845",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "b6a217dfa1b22ae1",
+        "type": "ui_tab",
+        "name": "K44",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
